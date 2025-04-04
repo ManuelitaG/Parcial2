@@ -23,10 +23,10 @@ namespace Parcial2.Controllers
 
         [HttpGet]
         [Route("ConsultarImagenes")]
-        public IQueryable ConsultarImagenes(string idPlaca)
+        public IQueryable ConsultarImagenes(string PlacaCamion)
         {
             clsPesaje pesaje = new clsPesaje();
-            return pesaje.ListarImagenes(idPlaca);
+            return pesaje.ListarImagenes(PlacaCamion);
         }
 
     }

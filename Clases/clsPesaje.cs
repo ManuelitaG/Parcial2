@@ -45,28 +45,24 @@ namespace Parcial2.Clases
             dbExamen.SaveChanges();
         }
 
-        public IQueryable ListarImagenes(string idPlaca)
+        public IQueryable ListarImagenes(string PlacaCamion)
         {
-            using (var cont = new DBExamenEntities1())
-            {
+            return from C in dbExamen.Set<Camion>()
+                   join P in dbExamen.Set<Pesaje>()
+                   on C.Placa equals P.PlacaCamion
+                   join FT in dbExamen.Set<FotoPesaje>()
+                   on P.id equals FT.idPesaje
+                   where C.Placa == PlacaCamion
+                   select new
+                   {
+                       Placa = PlacaCamion,
+                       Ejes = C.NumeroEjes,
+                       marca = C.Marca,
+                       Fecha = P.FechaPesaje,
+                       peso = P.Peso,
+                       imagen = FT.ImagenVehiculo
 
-                return from P in dbExamen.Set<Pesaje>()
-                       join C in dbExamen.Set<Camion>()
-                       on P.PlacaCamion equals C.Placa
-                       join FT in dbExamen.Set<FotoPesaje>()
-                       on P.id equals FT.idFotoPesaje
-                       where P.PlacaCamion == idPlaca
-                       orderby FT.idFotoPesaje
-                       select new
-                       {
-                           placa = P.PlacaCamion,
-                           Ejes = C.NumeroEjes,
-                           marca = C.Marca,
-                           fecha = P.FechaPesaje,
-                           peso = P.Peso,
-                           imagenes = FT.ImagenVehiculo
-                       };
-            }
+                   };
         }
 
         public string GuardarImagenPesaje(int idPesaje, List<string> Imagenes)
