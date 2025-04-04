@@ -9,6 +9,7 @@
 
 namespace Parcial2.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -17,7 +18,7 @@ namespace Parcial2.Models
         public int idFotoPesaje { get; set; }
         public string ImagenVehiculo { get; set; }
         public int idPesaje { get; set; }
-    
+        [JsonIgnore]
         public virtual Pesaje Pesaje { get; set; }
     }
 }

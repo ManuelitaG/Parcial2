@@ -9,6 +9,7 @@
 
 namespace Parcial2.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -25,8 +26,9 @@ namespace Parcial2.Models
         public string PlacaCamion { get; set; }
         public float Peso { get; set; }
         public string Estacion { get; set; }
-    
+        [JsonIgnore]
         public virtual Camion Camion { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FotoPesaje> FotoPesajes { get; set; }
     }
